@@ -13,4 +13,8 @@ const SkillSchema = new mongoose.Schema({
   },
 });
 
+FamilySchema.virtual("url").get(function () {
+  return `/inventory/skill/${this._id}`;
+});
+
 module.exports = mongoose.model("Skill", SkillSchema);
