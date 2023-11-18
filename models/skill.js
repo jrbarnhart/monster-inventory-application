@@ -1,4 +1,5 @@
 const mongoose = require("mongoose");
+
 const isIntValidator = require("./custom_validators/isIntValidator");
 
 const SkillSchema = new mongoose.Schema({
