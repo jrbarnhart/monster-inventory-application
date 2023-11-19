@@ -18,4 +18,8 @@ const MonsterSchema = new mongoose.Schema({
   },
 });
 
+MonsterSchema.virtual("url").get(function () {
+  return `/inventory/monster/${this._id}`;
+});
+
 module.exports = mongoose.model("Monster", MonsterSchema);
