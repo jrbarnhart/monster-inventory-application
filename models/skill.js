@@ -14,7 +14,7 @@ const SkillSchema = new mongoose.Schema({
   },
 });
 
-FamilySchema.virtual("url").get(function () {
+SkillSchema.virtual("url").get(function () {
   return `/inventory/skill/${this._id}`;
 });
 
