@@ -71,3 +71,9 @@ const MonsterInstanceSchema = new mongoose.Schema({
     validate: arrayValidator.lengthWithin(0, 8),
   },
 });
+
+MonsterInstanceSchema.virtual("url").get(function () {
+  return `/inventory/monsterinstance/${this._id}`;
+});
+
+module.exports = mongoose.model("MonsterInstance", MonsterInstanceSchema);
