@@ -16,7 +16,7 @@ exports.monster_metrics = asyncHandler(async (req, res, next) => {
     ]);
 
   res.render("monster_metrics", {
-    title: "Inventory",
+    title: "Monster Inventory",
     family_count: familyCount,
     monster_count: monsterCount,
     skill_count: skillCount,
