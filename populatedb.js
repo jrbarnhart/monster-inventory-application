@@ -101,19 +101,21 @@ async function monsterInstanceCreate(
 async function createSkills() {
   console.log("Adding skills");
   await Promise.all([
-    skillCreate(0, "Fireball", "Fire damage to all foes"),
-    skillCreate(1, "Radiant", "Decrease physical hit chance of all foes"),
-    skillCreate(2, "MegaMagic", "Highest Damage spell to all foes"),
-    skillCreate(3, "FireAir", "Fire damage to all foes"),
+    skillCreate(0, "Fireball", "Fire damage to all foes", 4),
+    skillCreate(1, "Radiant", "Decrease physical hit chance of all foes", 2),
+    skillCreate(2, "MegaMagic", "Highest Damage spell to all foes", 999),
+    skillCreate(3, "FireAir", "Fire damage to all foes", 2),
     skillCreate(
       4,
       "FireSlash",
-      "Normal attack based on Fire resistance of the foe"
+      "Normal attack based on Fire resistance of the foe",
+      3
     ),
     skillCreate(
       5,
       "SuckAll",
-      "Sucks in all attacks targeted at one ally for one turn"
+      "Sucks in all attacks targeted at one ally for one turn",
+      2
     ),
   ]);
 }
