@@ -4,7 +4,7 @@ html
     title= title
     link(rel='stylesheet', href='/stylesheets/style.css')
   body
-    nav 
+    nav.main-nav 
       ul 
         li 
           a(href="/") Home 
@@ -26,5 +26,6 @@ html
           a(href="/inventory/skill/create") Create New Skill 
         li 
           a(href="/inventory/monsterinstance/create") Create New Monster Instance
-    h1= title
-    block content
+    div.content
+      h1= title
+      block content
