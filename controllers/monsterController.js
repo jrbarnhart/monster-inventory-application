@@ -7,7 +7,21 @@ const MonsterInstance = require("../models/monsterinstance");
 
 // Inventory home page
 exports.monster_metrics = asyncHandler(async (req, res, next) => {
-  res.send("NYI: Inventory homepage with monster metrics");
+  const [familyCount, monsterCount, skillCount, monsterInstanceCount] =
+    await Promise.all([
+      Family.countDocuments({}).exec(),
+      Monster.countDocuments({}).exec(),
+      Skill.countDocuments({}).exec(),
+      MonsterInstance.countDocuments({}).exec(),
+    ]);
+
+  res.render("monster_metrics", {
+    title: "Inventory",
+    family_count: familyCount,
+    monster_count: monsterCount,
+    skill_count: skillCount,
+    monster_instance_count: monsterInstanceCount,
+  });
 });
 
 // List all monsters
