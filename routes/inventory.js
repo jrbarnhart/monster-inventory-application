@@ -3,6 +3,7 @@ const router = express.Router();
 
 const family_controller = require("../controllers/familyController");
 const monster_controller = require("../controllers/monsterController");
+const skill_controller = require("../controllers/skillController");
 
 // GET inventory index (currently using monster metrics)
 router.get("/", monster_controller.monster_metrics);
@@ -58,5 +59,31 @@ router.get("/family/:id", family_controller.family_detail);
 
 // GET family list
 router.get("/families", family_controller.family_list);
+
+/// Skill Routes ///
+
+// GET create skill form
+router.get("/skill/create", skill_controller.skill_create_get);
+
+// POST create skill form
+router.post("/skill/create", skill_controller.skill_create_post);
+
+// GET delete skill form
+router.get("/skill/:id/delete", skill_controller.skill_delete_get);
+
+// POST delete skill form
+router.post("/skill/:id/delete", skill_controller.skill_delete_post);
+
+// GET update skill form
+router.get("/skill/:id/update", skill_controller.skill_update_get);
+
+// POST update skill form
+router.post("/skill/:id/update", skill_controller.skill_update_post);
+
+// GET skill details
+router.get("/skill/:id", skill_controller.skill_detail);
+
+// GET skill list
+router.get("/skills", skill_controller.skill_list);
 
 module.exports = router;
