@@ -4,6 +4,7 @@ const router = express.Router();
 const family_controller = require("../controllers/familyController");
 const monster_controller = require("../controllers/monsterController");
 const skill_controller = require("../controllers/skillController");
+const monsterinstance_controller = require("../controllers/monsterInstanceController");
 
 // GET inventory index (currently using monster metrics)
 router.get("/", monster_controller.monster_metrics);
@@ -85,5 +86,55 @@ router.get("/skill/:id", skill_controller.skill_detail);
 
 // GET skill list
 router.get("/skills", skill_controller.skill_list);
+
+/// Monster Instance Routes ///
+
+// GET create monsterinstance form
+router.get(
+  "/monsterinstance/create",
+  monsterinstance_controller.monsterinstance_create_get
+);
+
+// POST create monsterinstance form
+router.post(
+  "/monsterinstance/create",
+  monsterinstance_controller.monsterinstance_create_post
+);
+
+// GET delete monsterinstance form
+router.get(
+  "/monsterinstance/:id/delete",
+  monsterinstance_controller.monsterinstance_delete_get
+);
+
+// POST delete monsterinstance form
+router.post(
+  "/monsterinstance/:id/delete",
+  monsterinstance_controller.monsterinstance_delete_post
+);
+
+// GET update monsterinstance form
+router.get(
+  "/monsterinstance/:id/update",
+  monsterinstance_controller.monsterinstance_update_get
+);
+
+// POST update monsterinstance form
+router.post(
+  "/monsterinstance/:id/update",
+  monsterinstance_controller.monsterinstance_update_post
+);
+
+// GET monsterinstance details
+router.get(
+  "/monsterinstance/:id",
+  monsterinstance_controller.monsterinstance_detail
+);
+
+// GET monsterinstance list
+router.get(
+  "/monsterinstances",
+  monsterinstance_controller.monsterinstance_list
+);
 
 module.exports = router;
