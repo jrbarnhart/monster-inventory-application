@@ -11,12 +11,12 @@ const MonsterSchema = new mongoose.Schema({
     required: true,
   },
   info: { type: String, maxLength: 200, required: true },
-  stock: { type: Number, min: 0, required: true, validate: isIntValidator },
   innate_skills: {
     type: [mongoose.Schema.Types.ObjectId],
     validate: arrayValidator.lengthEquals(3),
     required: true,
   },
+  stock: { type: Number, min: 0, required: true, validate: isIntValidator },
 });
 
 MonsterSchema.virtual("url").get(function () {
