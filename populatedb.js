@@ -103,7 +103,7 @@ async function createSkills() {
   await Promise.all([
     skillCreate(0, "Fireball", "Fire damage to all foes", 4),
     skillCreate(1, "Radiant", "Decrease physical hit chance of all foes", 2),
-    skillCreate(2, "MegaMagic", "Highest Damage spell to all foes", 999),
+    skillCreate(2, "MegaMagic", "Highest Damage spell to all foes", 99),
     skillCreate(3, "FireAir", "Fire damage to all foes", 2),
     skillCreate(
       4,
