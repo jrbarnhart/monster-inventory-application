@@ -1,6 +1,6 @@
-const Family = require("../models/family");
-
 const asyncHandler = require("express-async-handler");
+
+const Family = require("../models/family");
 
 // List all families
 exports.family_list = asyncHandler(async (req, res, next) => {
