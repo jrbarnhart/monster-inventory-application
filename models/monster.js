@@ -12,9 +12,10 @@ const MonsterSchema = new mongoose.Schema({
   },
   info: { type: String, maxLength: 200, required: true },
   stock: { type: Number, min: 0, required: true, validate: isIntValidator },
-  innate_abilities: {
+  innate_skills: {
     type: [mongoose.Schema.Types.ObjectId],
     validate: arrayValidator.lengthEquals(3),
+    required: true,
   },
 });
 
