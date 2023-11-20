@@ -131,7 +131,7 @@ async function createFamilies() {
     familyCreate(
       1,
       "Dragon",
-      "Dragons grow in a slow manner and can resistant to fire"
+      "Dragons grow in a slow manner and are resistant to fire"
     ),
   ]);
 }
@@ -159,7 +159,7 @@ async function createMonsters() {
 }
 
 async function createMonsterInstances() {
-  console.log("Adding authors");
+  console.log("Adding monster instances");
   await Promise.all([
     monsterInstanceCreate(
       0,
