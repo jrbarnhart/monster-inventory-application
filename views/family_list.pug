@@ -1,0 +1,12 @@
+extends layout 
+
+block content
+  div.family-list-content
+    h2 All Families
+
+    ul
+      each family in family_list 
+        li 
+          p #[a(href=family.url) #{family.name}]
+      else 
+        p There are no families.
