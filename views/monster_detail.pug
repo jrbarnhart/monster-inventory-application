@@ -5,7 +5,7 @@ block content
     h2.name #{monster.name} - #[a.family(href=monster.family.url) #{monster.family.name} Family]
 
     p.info #[span Info:] #{monster.info}.
-    ul.skills Skills 
+    ul.skills Skills: 
       each skill in monster.innate_skills
         li
           p.skill #[a.skill-name(href=skill.url) #{skill.name}]: (#{skill.magic_cost < 99 ? skill.magic_cost : "All" } MP) #{skill.info}.
