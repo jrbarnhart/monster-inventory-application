@@ -4,4 +4,37 @@
 
 .monster-list-content ul {
   list-style: none;
+  display: grid;
+  border: 1px solid black;
+}
+
+.monster-list-content ul li {
+  padding: 4px;
+  border-top: 1px solid black;
+}
+.monster-list-content ul li:nth-child(1) {
+  border-top: none;
+}
+
+.monster-list-content ul li:nth-child(2n) {
+  background-color: rgb(231, 231, 231);
+}
+
+.monster-list-content ul li:nth-child(2n - 1) {
+  background-color: rgb(202, 202, 202);
+}
+
+.monster-list-content li a {
+  color: black;
+  vertical-align: bottom;
+}
+
+.monster-list-content li p {
+  margin: 0;
+}
+
+.monster-list-content .name {
+  color: black;
+  font-size: 1.3rem;
+  font-weight: bold;
 }
