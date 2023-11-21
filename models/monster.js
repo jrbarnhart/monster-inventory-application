@@ -13,6 +13,7 @@ const MonsterSchema = new mongoose.Schema({
   info: { type: String, maxLength: 200, required: true },
   innate_skills: {
     type: [mongoose.Schema.Types.ObjectId],
+    ref: "Skill",
     validate: arrayValidator.lengthEquals(3),
     required: true,
   },
