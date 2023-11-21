@@ -7,6 +7,6 @@ block content
     ul
       each family in family_list 
         li 
-          p #[a(href=family.url) #{family.name}]
+          p.name #[a(href=family.url) #{family.name}]
       else 
         p There are no families.
