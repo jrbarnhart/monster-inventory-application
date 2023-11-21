@@ -2,14 +2,14 @@ extends layout
 
 block content 
   div.monster-metrics-content
-    h2 Metrics
+    h2 Totals
 
     ul 
       li 
-        p Total #[a(href="/inventory/families") Families]: #{family_count}
+        p #[a(href="/inventory/families") Families]: #{family_count}
       li 
-        p Total #[a(href="/inventory/monsters") Monsters]: #{monster_count}
+        p #[a(href="/inventory/monsters") Monsters]: #{monster_count}
       li 
-        p Total #[a(href="/inventory/monsterinstances") Monster Instances]: #{monster_instance_count}
+        p #[a(href="/inventory/monsterinstances") Monster Instances]: #{monster_instance_count}
       li 
-        p Total #[a(href="inventory/skills") Skills]: #{skill_count}
+        p #[a(href="inventory/skills") Skills]: #{skill_count}
