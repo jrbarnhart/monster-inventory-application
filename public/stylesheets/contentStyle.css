@@ -2,6 +2,15 @@
   list-style: none;
 }
 
+.monster-metrics-content li a {
+  color: black;
+}
+
+.monster-metrics-content li {
+  font-size: 1.3rem;
+  font-weight: bold;
+}
+
 .monster-list-content ul {
   list-style: none;
   display: grid;
