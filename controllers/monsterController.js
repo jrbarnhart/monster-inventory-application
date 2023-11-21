@@ -26,7 +26,12 @@ exports.monster_metrics = asyncHandler(async (req, res, next) => {
 
 // List all monsters
 exports.monster_list = asyncHandler(async (req, res, next) => {
-  res.send("NYI: List monsters GET");
+  const allMonsters = Monster.find({}).exec();
+
+  res.render("monster_list", {
+    title: "Monster List",
+    monster_list: allMonsters,
+  });
 });
 
 // Display details for specific monster
