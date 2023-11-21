@@ -26,10 +26,7 @@ exports.monster_metrics = asyncHandler(async (req, res, next) => {
 
 // List all monsters
 exports.monster_list = asyncHandler(async (req, res, next) => {
-  const allMonsters = await Monster.find({})
-    .populate("family")
-    .populate("innate_skills")
-    .exec();
+  const allMonsters = await Monster.find({}).populate("family").exec();
 
   res.render("monster_list", {
     title: "Monster List",
@@ -39,7 +36,15 @@ exports.monster_list = asyncHandler(async (req, res, next) => {
 
 // Display details for specific monster
 exports.monster_detail = asyncHandler(async (req, res, next) => {
-  res.send(`NYI: Monster details - ${req.params.id}`);
+  const monster = await Monster.findById(req.params.id)
+    .populate("family")
+    .populate("innate_skills")
+    .exec();
+
+  res.render("monster_detail", {
+    title: "Monster Details",
+    monster: monster,
+  });
 });
 
 // Display create monster form on GET
