@@ -17,19 +17,19 @@
   border: 1px solid black;
 }
 
-.monster-list-content ul li {
+.monster-list-content li {
   padding: 4px;
   border-top: 1px solid black;
 }
-.monster-list-content ul li:nth-child(1) {
+.monster-list-content li:nth-child(1) {
   border-top: none;
 }
 
-.monster-list-content ul li:nth-child(2n) {
+.monster-list-content li:nth-child(2n) {
   background-color: rgb(231, 231, 231);
 }
 
-.monster-list-content ul li:nth-child(2n - 1) {
+.monster-list-content li:nth-child(2n - 1) {
   background-color: rgb(202, 202, 202);
 }
 
