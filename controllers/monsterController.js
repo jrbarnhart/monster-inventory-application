@@ -26,7 +26,10 @@ exports.monster_metrics = asyncHandler(async (req, res, next) => {
 
 // List all monsters
 exports.monster_list = asyncHandler(async (req, res, next) => {
-  const allMonsters = Monster.find({}).exec();
+  const allMonsters = await Monster.find({})
+    .populate("family")
+    .populate("innate_skills")
+    .exec();
 
   res.render("monster_list", {
     title: "Monster List",
