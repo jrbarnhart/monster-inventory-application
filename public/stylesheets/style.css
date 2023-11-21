@@ -44,8 +44,35 @@ h4 {
 
 .content {
   box-sizing: border-box;
+  padding-top: 15px;
+  padding-left: 15px;
+  padding-right: 15px;
 }
 
 a {
   color: #00b7ff;
+}
+
+@media only screen and (max-width: 480px) {
+  body {
+    grid-template: min-content 1fr / 1fr;
+  }
+
+  .main-nav {
+    grid-auto-flow: column;
+    column-gap: 5px;
+  }
+
+  .main-nav ul::after,
+  .main-nav ul::before {
+    border: none;
+  }
+
+  .main-nav ul {
+    border-left: 2px dotted black;
+    border-right: 2px dotted black;
+    height: 100%;
+    align-content: start;
+    row-gap: 15px;
+  }
 }
