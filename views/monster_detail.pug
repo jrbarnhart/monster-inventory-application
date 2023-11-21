@@ -8,7 +8,7 @@ block content
     ul.skills Skills 
       each skill in monster.innate_skills
         li
-          p.skill #[a(href=skill.url) #{skill.name}]: (#{skill.magic_cost < 99 ? skill.magic_cost : "All" } MP) #{skill.info}.
+          p.skill #[a.skill-name(href=skill.url) #{skill.name}]: (#{skill.magic_cost < 99 ? skill.magic_cost : "All" } MP) #{skill.info}.
       else 
         li This monster has no skills.
     p.stock Total in stock: #{monster.stock}
