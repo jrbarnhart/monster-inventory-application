@@ -1,3 +1,4 @@
+/* Home Page/Monster Metrics */
 .monster-metrics-content ul {
   list-style: none;
 }
@@ -11,6 +12,7 @@
   font-weight: bold;
 }
 
+/* Monster List */
 .monster-list-content ul {
   list-style: none;
   display: grid;
@@ -45,5 +47,42 @@
 .monster-list-content .name {
   color: black;
   font-size: 1.3rem;
+  font-weight: bold;
+}
+
+/* Monster Detail */
+.monster-detail-content .family {
+  color: black;
+  font-size: 1.25rem;
+}
+
+.monster-detail-content .info {
+  font-style: italic;
+  font-size: 1.15rem;
+}
+
+.monster-detail-content .info span {
+  font-style: normal;
+  font-weight: bold;
+}
+
+.monster-detail-content .skills {
+  font-weight: bold;
+  font-size: 1.15rem;
+  list-style: none;
+}
+
+.monster-detail-content .skills .skill-name {
+  font-weight: bold;
+  color: black;
+}
+
+.monster-detail-content .skills li {
+  font-weight: normal;
+  font-size: 1rem;
+}
+
+.monster-detail-content .stock {
+  font-size: 1.15rem;
   font-weight: bold;
 }
