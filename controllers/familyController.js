@@ -4,7 +4,12 @@ const Family = require("../models/family");
 
 // List all families
 exports.family_list = asyncHandler(async (req, res, next) => {
-  res.send("NYI: List families GET");
+  const allFamilies = await Family.find({}).sort({ name: 1 }).exec();
+
+  res.render("family_list", {
+    title: "Family List",
+    family_list: allFamilies,
+  });
 });
 
 // Display details for specific family
