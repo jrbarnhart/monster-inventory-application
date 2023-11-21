@@ -86,3 +86,40 @@
   font-size: 1.15rem;
   font-weight: bold;
 }
+
+/* Family List */
+.family-list-content ul {
+  list-style: none;
+  display: grid;
+  border: 1px solid black;
+}
+
+.family-list-content li {
+  padding: 4px;
+  border-top: 1px solid black;
+}
+.family-list-content li:nth-child(1) {
+  border-top: none;
+}
+
+.family-list-content li:nth-child(2n) {
+  background-color: rgb(231, 231, 231);
+}
+
+.family-list-content li:nth-child(2n - 1) {
+  background-color: rgb(202, 202, 202);
+}
+
+.family-list-content li a {
+  color: black;
+}
+
+.family-list-content li p {
+  margin: 0;
+}
+
+.family-list-content .name {
+  color: black;
+  font-size: 1.3rem;
+  font-weight: bold;
+}
