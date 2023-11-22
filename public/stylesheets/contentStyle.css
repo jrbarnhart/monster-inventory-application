@@ -220,3 +220,44 @@
   font-size: 1.3rem;
   font-weight: bold;
 }
+
+/* Monster Instance Detail */
+.monsterinstance-detail-content .monster {
+  color: black;
+  font-size: 1.25rem;
+}
+
+.monsterinstance-detail-content .stats {
+  padding: 13px 0;
+}
+
+.monsterinstance-detail-content .stats li {
+  font-weight: normal;
+  font-size: 1rem;
+  padding: 5px 0;
+}
+
+.monsterinstance-detail-content .stats li p {
+  margin: 0;
+}
+
+.monsterinstance-detail-content .stats li span {
+  font-weight: bold;
+}
+
+.monsterinstance-detail-content .skills,
+.monsterinstance-detail-content .stats {
+  font-weight: bold;
+  font-size: 1.15rem;
+  list-style: none;
+}
+
+.monsterinstance-detail-content .skills .skill-name {
+  font-weight: bold;
+  color: black;
+}
+
+.monsterinstance-detail-content .skills li {
+  font-weight: normal;
+  font-size: 1rem;
+}
