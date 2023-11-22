@@ -4,7 +4,16 @@ const MonsterInstance = require("../models/monsterinstance");
 
 // List all MonsterInstances
 exports.monsterinstance_list = asyncHandler(async (req, res, next) => {
-  res.send("NYI: List monsterinstances GET");
+  const allMonsterInstances = await MonsterInstance.find({})
+    .populate("monster")
+    .populate("skills")
+    .sort({ nickname: 1 })
+    .exec();
+
+  res.render("monsterinstance_list", {
+    title: "Monster Instance List",
+    monsterinstance_list: allMonsterInstances,
+  });
 });
 
 // Display details for specific monsterinstance
