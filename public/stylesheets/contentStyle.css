@@ -123,3 +123,14 @@
   font-size: 1.3rem;
   font-weight: bold;
 }
+
+/* Family Detail */
+.family-detail-content .info {
+  font-style: italic;
+  font-size: 1.15rem;
+}
+
+.family-detail-content .info span {
+  font-style: normal;
+  font-weight: bold;
+}
