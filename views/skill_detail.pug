@@ -1,0 +1,8 @@
+extends layout 
+
+block content 
+  div.skill-detail-content
+    h2.name #{skill.name}
+
+    p.info #[span Info:] #{skill.info}.
+    p.magic_cost MP Cost: #{skill.magic_cost < 99 ? skill.magic_cost : "All"}
