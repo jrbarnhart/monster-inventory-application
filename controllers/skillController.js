@@ -4,7 +4,12 @@ const Skill = require("../models/skill");
 
 // List all skills
 exports.skill_list = asyncHandler(async (req, res, next) => {
-  res.send("NYI: Sills list");
+  const allSkills = await Skill.find({}).sort({ name: 1 }).exec();
+
+  res.render("skill_list", {
+    title: "Skill List",
+    skill_list: allSkills,
+  });
 });
 
 // Get skill details
