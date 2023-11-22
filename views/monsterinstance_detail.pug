@@ -1,0 +1,28 @@
+extends layout 
+
+block content 
+  div.monsterinstance-detail-content
+    h2 #{monsterinstance.nickname} - #[a.monster(href=monsterinstance.monster.url) #{monsterinstance.monster.name}]
+
+    ul.stats Stats: 
+      li
+        p.health #[span Health:] #{monsterinstance.health}
+      li
+        p.magic #[span Magic Points:] #{monsterinstance.magic}
+      li
+        p.attack #[span Attack:] #{monsterinstance.attack}
+      li
+        p.defense #[span Defense:] #{monsterinstance.defense}
+      li
+        p.agility #[span Agility:] #{monsterinstance.agility}
+      li
+        p.intelligence #[span Intelligence:] #{monsterinstance.intelligence}
+      li
+        p.gender #[span Gender:] #{monsterinstance.gender}
+
+    ul.skills Skills: 
+      each skill in monsterinstance.skills
+        li
+          p.skill #[a.skill-name(href=skill.url) #{skill.name}]: (#{skill.magic_cost < 99 ? skill.magic_cost : "All" } MP) #{skill.info}.
+      else 
+        li This monster has no skills.
