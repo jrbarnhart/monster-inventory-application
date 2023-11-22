@@ -67,6 +67,7 @@ const MonsterInstanceSchema = new mongoose.Schema({
   },
   skills: {
     type: [mongoose.Schema.Types.ObjectId],
+    ref: "Skill",
     required: true,
     validate: arrayValidator.lengthWithin(0, 8),
   },
