@@ -14,7 +14,12 @@ exports.skill_list = asyncHandler(async (req, res, next) => {
 
 // Get skill details
 exports.skill_detail = asyncHandler(async (req, res, next) => {
-  res.send("NYI: Sill detail");
+  const skill = await Skill.findById(req.params.id).exec();
+
+  res.render("skill_detail", {
+    title: "Skill Details",
+    skill: skill,
+  });
 });
 
 // Display create skill form
