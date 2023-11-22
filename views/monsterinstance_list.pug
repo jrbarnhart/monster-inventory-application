@@ -1,0 +1,12 @@
+extends layout 
+
+block content 
+  div.monsterinstance-list-content
+    h2 All Monster Instances
+
+    ul
+      each monsterinstance in monsterinstance_list 
+        li 
+          p #[a.nickname(href=monsterinstance.url) #{monsterinstance.nickname}] - #[a.monster(href=monsterinstance.monster.url) #{monsterinstance.monster.name}]
+      else 
+        p There are no monsters.
