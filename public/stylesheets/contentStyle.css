@@ -182,3 +182,41 @@
   font-style: normal;
   font-weight: bold;
 }
+
+/* Monster Instance List */
+.monsterinstance-list-content ul {
+  list-style: none;
+  display: grid;
+  border: 1px solid black;
+}
+
+.monsterinstance-list-content li {
+  padding: 4px;
+  border-top: 1px solid black;
+}
+.monsterinstance-list-content li:nth-child(1) {
+  border-top: none;
+}
+
+.monsterinstance-list-content li:nth-child(2n) {
+  background-color: rgb(231, 231, 231);
+}
+
+.monsterinstance-list-content li:nth-child(2n - 1) {
+  background-color: rgb(202, 202, 202);
+}
+
+.monsterinstance-list-content li a {
+  color: black;
+}
+
+.monsterinstance-list-content li p {
+  margin: 0;
+  font-size: 1.1rem;
+}
+
+.monsterinstance-list-content .nickname {
+  color: black;
+  font-size: 1.3rem;
+  font-weight: bold;
+}
