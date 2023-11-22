@@ -14,7 +14,12 @@ exports.family_list = asyncHandler(async (req, res, next) => {
 
 // Display details for specific family
 exports.family_detail = asyncHandler(async (req, res, next) => {
-  res.send(`NYI: Family details for: ${req.params.id}`);
+  const family = await Family.findById(req.params.id).exec();
+
+  res.render("family_detail", {
+    title: "Family Details",
+    family: family,
+  });
 });
 
 // Display create family form on GET
