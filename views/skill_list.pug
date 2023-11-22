@@ -1,0 +1,12 @@
+extends layout 
+
+block content 
+  div.skill-list-content
+    h2 All Skills
+
+    ul
+      each skill in skill_list 
+        li 
+          p.name #[a(href=skill.url) #{skill.name}] - #{skill.info}.
+      else 
+        p There are no skills.
