@@ -7,6 +7,6 @@ block content
     ul
       each skill in skill_list 
         li 
-          p.name #[a(href=skill.url) #{skill.name}] - #{skill.info}.
+          p #[a.name(href=skill.url) #{skill.name}] - #{skill.info}.
       else 
         p There are no skills.
