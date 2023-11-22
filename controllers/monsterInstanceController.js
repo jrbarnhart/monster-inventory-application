@@ -18,7 +18,12 @@ exports.monsterinstance_list = asyncHandler(async (req, res, next) => {
 
 // Display details for specific monsterinstance
 exports.monsterinstance_detail = asyncHandler(async (req, res, next) => {
-  res.send(`NYI: monsterinstance details - ${req.params.id}`);
+  const monsterInstance = await MonsterInstance.findById(req.props.id).exec();
+
+  res.render("monsterinstance_detail", {
+    title: "Monster Instance Details",
+    monsterinstance: monsterInstance,
+  });
 });
 
 // Display create monsterinstance form on GET
