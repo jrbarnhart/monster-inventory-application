@@ -57,7 +57,6 @@
 }
 
 .monster-detail-content .info {
-  font-style: italic;
   font-size: 1.15rem;
 }
 
@@ -126,7 +125,6 @@
 
 /* Family Detail */
 .family-detail-content .info {
-  font-style: italic;
   font-size: 1.15rem;
 }
 
@@ -170,5 +168,17 @@
 .skill-list-content .name {
   color: black;
   font-size: 1.3rem;
+  font-weight: bold;
+}
+
+/* Skill Detail */
+.skill-detail-content .info,
+.skill-detail-content .magic-cost {
+  font-size: 1.15rem;
+}
+
+.skill-detail-content .info span,
+.skill-detail-content .magic-cost span {
+  font-style: normal;
   font-weight: bold;
 }
