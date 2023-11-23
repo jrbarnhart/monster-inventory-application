@@ -49,7 +49,9 @@ exports.monster_detail = asyncHandler(async (req, res, next) => {
 
 // Display create monster form on GET
 exports.monster_create_get = asyncHandler(async (req, res, next) => {
-  res.send("NYI: Create monster GET");
+  res.render("monster_create_get", {
+    title: "Create a Monster",
+  });
 });
 
 // Handle create monster form on POST
