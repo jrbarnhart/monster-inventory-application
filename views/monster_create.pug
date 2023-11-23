@@ -1,0 +1,22 @@
+extends layout 
+
+block content
+  div.monster-create-content
+    form(method="POST" action="")
+      ul 
+        li 
+          label(for="name") Name:
+          input#name(type="text" name="name" placeholder="Monster Name" required="true" value=(undefined===monster ? "" : monster.name))
+        li 
+          label(for="family") Family: 
+          select#family(type="select", placeholder="Select Family" name="family" required="true" value=(undefined===monster ? "" : monster.family))
+            for family in family_list
+              if monster 
+                option(value=family._id selected=(family._id.toString()===monster.family._id.toString() ? 'selected' : false)) #{family.name}
+              else 
+                option(value=family._id) #{family.name}
+        li 
+          label(for="info") Info: 
+          textarea#info(name="info" placeholder="Monster info..." required="true" value=(undefined===monster ? "" : monster.info))
+        li 
+          label(for="skills") Skills:
