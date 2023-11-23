@@ -49,8 +49,15 @@ exports.monster_detail = asyncHandler(async (req, res, next) => {
 
 // Display create monster form on GET
 exports.monster_create_get = asyncHandler(async (req, res, next) => {
+  const [allFamilies, allSkills] = await Promise.all([
+    Family.find({}).sort({ name: 1 }).exec(),
+    Skill.find({}).sort({ name: 1 }).exec(),
+  ]);
+
   res.render("monster_create", {
     title: "Create a Monster",
+    family_list: allFamilies,
+    skill_list: allSkills,
   });
 });
 
