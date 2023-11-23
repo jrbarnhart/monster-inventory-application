@@ -49,7 +49,7 @@ exports.monster_detail = asyncHandler(async (req, res, next) => {
 
 // Display create monster form on GET
 exports.monster_create_get = asyncHandler(async (req, res, next) => {
-  res.render("monster_create_get", {
+  res.render("monster_create", {
     title: "Create a Monster",
   });
 });
