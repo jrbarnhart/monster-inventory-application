@@ -20,7 +20,7 @@ block content
           textarea#info(name="info" placeholder="Monster info..." required="true" value=(undefined===monster ? "" : monster.info))
         li Skill Selection: 
           - var n = 0;
-          ul 
+          ul.skills 
             while n < 3
               li 
                 label(for=`skill-${n}`) #{n + 1} -
