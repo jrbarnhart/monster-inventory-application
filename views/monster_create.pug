@@ -10,7 +10,7 @@ block content
         li 
           label(for="family") Family: 
           select#family(type="select", placeholder="Select Family" name="family" required="true" value=(undefined===monster ? "" : monster.family))
-            for family in family_list
+            each family in family_list
               if monster 
                 option(value=family._id selected=(family._id.toString()===monster.family._id.toString() ? 'selected' : false)) #{family.name}
               else 
@@ -18,5 +18,17 @@ block content
         li 
           label(for="info") Info: 
           textarea#info(name="info" placeholder="Monster info..." required="true" value=(undefined===monster ? "" : monster.info))
-        li 
-          label(for="skills") Skills:
+        li Skill Selection: 
+          - var n = 0;
+          ul 
+            while n < 3
+              li 
+                label(for=`skill-${n}`) #{n + 1} -
+                select(id=`skill-${n}` name=`skill-${n}`)
+                  option(value=null) None
+                  each skill in skill_list
+                    option(value=skill._id) #{skill.name}
+                  else 
+                    option No skills in database.
+              - n++;
+      input( type="submit" value="Submit Monster")
