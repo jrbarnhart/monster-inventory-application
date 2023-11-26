@@ -261,3 +261,32 @@
   font-weight: normal;
   font-size: 1rem;
 }
+
+/* Monster Create */
+.monster-create-content form {
+  display: grid;
+  row-gap: 20px;
+}
+.monster-create-content .form-section {
+  display: grid;
+  row-gap: 8px;
+  font-size: 1.15rem;
+  font-weight: bold;
+}
+
+.monster-create-content .form-section ul {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  list-style: none;
+}
+
+.monster-create-content input,
+.monster-create-content select,
+.monster-create-content textarea {
+  font-size: 1.1rem;
+}
+
+.monster-create-content #submit {
+  height: 40px;
+}
