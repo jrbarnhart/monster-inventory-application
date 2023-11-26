@@ -23,6 +23,7 @@ h4 {
   row-gap: 40px;
   width: 100%;
   box-sizing: border-box;
+  max-height: 100%;
 }
 
 .main-nav ul {
@@ -49,6 +50,7 @@ h4 {
   padding-top: 15px;
   padding-left: 15px;
   padding-right: 15px;
+  max-width: 600px;
 }
 
 a {
