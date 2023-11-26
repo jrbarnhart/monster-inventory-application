@@ -20,7 +20,7 @@ block content
         ul.skills 
           while n < 3
             li 
-              label(for=`skill-${n}`) #{n + 1} -
+              label(for=`skill-${n}`) #{n + 1} - 
               select(id=`skill-${n}` name=`skill-${n}`)
                 option(value=null) None
                 each skill in skill_list
