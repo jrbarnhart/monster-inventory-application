@@ -24,7 +24,10 @@ block content
               select(id=`skill-${n}` name=`skill-${n}`)
                 option(value=null) None
                 each skill in skill_list
-                  option(value=skill._id) #{skill.name}
+                  if monster 
+                    option(value=skill._id selected=(monster.skills[n]._id === skill._id)) #{skill.name}
+                  else
+                    option(value=skill._id) #{skill.name}
                 else 
                   option No skills in database.
             - n++;
