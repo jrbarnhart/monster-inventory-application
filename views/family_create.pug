@@ -7,6 +7,10 @@ block content
         label(for="name") Name:
         input#name(type="text" name="name" placeholder="Family Name" required="true" value=(undefined===family ? "" : family.name)) 
         label(for="info") Info: 
-        textarea#info(name="info" placeholder="Family info..." required="true" value=(undefined===family ? "" : family.info))
+        textarea#info(name="info" placeholder="Family info..." required="true") #{undefined===family ? "" : family.info}
       div.form-section
         input#submit( type="submit" value="Submit Family")
+        if errors
+          ul.errors
+            for error in errors
+              li!= error.msg
