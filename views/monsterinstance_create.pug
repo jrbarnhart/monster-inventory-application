@@ -13,13 +13,6 @@ block content
               option(value=monster._id selected=(monster._id.toString()===monsterinstance.monster._id.toString() ? 'selected' : false)) #{monster.name}
             else 
               option(value=monster._id) #{monster.name}
-        label(for="family") Family: 
-        select#family(type="select" name="family" required="true" value=(undefined===monsterinstance ? "" : monsterinstance.family))
-          each family in family_list
-            if monsterinstance 
-              option(value=family._id selected=(family._id.toString()===monsterinstance.family._id.toString() ? 'selected' : false)) #{family.name}
-            else 
-              option(value=family._id) #{family.name}
       div.form-section.stats
         label(for="health") Health:
         input#health.stat(name="health" type="number" min=0 max=999 required="true" value=(undefined===monsterinstance ? "" : monsterinstance.health) )
