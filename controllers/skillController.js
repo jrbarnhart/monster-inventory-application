@@ -49,7 +49,7 @@ exports.skill_create_post = [
     const skill = new Skill({
       name: req.body.name,
       info: req.body.info,
-      magic_cost: req.body.magic - cost,
+      magic_cost: req.body.magic_cost,
     });
 
     if (!errors.isEmpty()) {
