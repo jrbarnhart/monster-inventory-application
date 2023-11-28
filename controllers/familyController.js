@@ -1,4 +1,5 @@
 const asyncHandler = require("express-async-handler");
+const { body, validationResult } = require("express-validator");
 
 const Family = require("../models/family");
 
@@ -30,9 +31,40 @@ exports.family_create_get = asyncHandler(async (req, res, next) => {
 });
 
 // Handle create family form on POST
-exports.family_create_post = asyncHandler(async (req, res, next) => {
-  res.send("NYI: Create family POST");
-});
+exports.family_create_post = [
+  body("name")
+    .trim()
+    .isLength({ min: 2, max: 20 })
+    .escape()
+    .withMessage("Name must be given.")
+    .isAlphanumeric("Name can only contain alphanumeric characters."),
+  body("info")
+    .trim()
+    .isLength({ max: 200 })
+    .escape()
+    .withMessage("Info must be given."),
+
+  asyncHandler(async (req, res, next) => {
+    const errors = validationResult(req);
+
+    const family = new Family({
+      name: req.body.name,
+      info: req.body.info,
+    });
+
+    if (!errors.isEmpty()) {
+      res.render("family_create", {
+        title: "Create a Family",
+        family: family,
+        errors: errors.array(),
+      });
+      return;
+    } else {
+      await family.save();
+      res.redirect(family.url);
+    }
+  }),
+];
 
 // Display delete family form on GET
 exports.family_delete_get = asyncHandler(async (req, res, next) => {
