@@ -379,3 +379,9 @@
 .monsterinstance-create-content #submit {
   height: 40px;
 }
+
+/* Errors */
+.errors {
+  color: red;
+  list-style: none;
+}
