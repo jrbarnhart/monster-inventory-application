@@ -290,3 +290,26 @@
 .monster-create-content #submit {
   height: 40px;
 }
+
+/* Family Create */
+
+.family-create-content form {
+  display: grid;
+  row-gap: 20px;
+}
+.family-create-content .form-section {
+  display: grid;
+  row-gap: 8px;
+  font-size: 1.15rem;
+  font-weight: bold;
+}
+
+.family-create-content input,
+.family-create-content select,
+.family-create-content textarea {
+  font-size: 1.1rem;
+}
+
+.family-create-content #submit {
+  height: 40px;
+}
