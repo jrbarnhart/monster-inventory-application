@@ -1,6 +1,9 @@
 const asyncHandler = require("express-async-handler");
 
 const MonsterInstance = require("../models/monsterinstance");
+const Monster = require("../models/monster");
+const Family = require("../models/family");
+const Skill = require("../models/skill");
 
 // List all MonsterInstances
 exports.monsterinstance_list = asyncHandler(async (req, res, next) => {
@@ -31,7 +34,18 @@ exports.monsterinstance_detail = asyncHandler(async (req, res, next) => {
 
 // Display create monsterinstance form on GET
 exports.monsterinstance_create_get = asyncHandler(async (req, res, next) => {
-  res.send("NYI: Create monsterinstance GET");
+  const [allMonsters, allFamilies, allSkills] = await Promise.all([
+    Monster.find({}).sort({ name: 1 }).exec(),
+    Family.find({}).sort({ name: 1 }).exec(),
+    Skill.find({}).sort({ name: 1 }).exec(),
+  ]);
+
+  res.render("monsterinstance_create", {
+    title: "Create a Monster Instance",
+    monster_list: allMonsters,
+    family_list: allFamilies,
+    skill_list: allSkills,
+  });
 });
 
 // Handle create monsterinstance form on POST
