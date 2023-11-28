@@ -1,4 +1,5 @@
 const asyncHandler = require("express-async-handler");
+const { body, validationResult } = require("express-validator");
 
 const Skill = require("../models/skill");
 
@@ -30,9 +31,39 @@ exports.skill_create_get = asyncHandler(async (req, res, next) => {
 });
 
 // Handle create skill form
-exports.skill_create_post = asyncHandler(async (req, res, next) => {
-  res.send("NYI: POST create skill form");
-});
+exports.skill_create_post = [
+  body("name")
+    .trim()
+    .isLength({ min: 2, max: 20 })
+    .escape()
+    .withMessage("Name must be between 2 and 20 characters."),
+  body("info")
+    .trim()
+    .isLength({ max: 200 })
+    .escape()
+    .withMessage("Info must be 200 characters or less."),
+
+  asyncHandler(async (req, res, next) => {
+    const errors = validationResult(req);
+
+    const skill = new Skill({
+      name: req.body.name,
+      info: req.body.info,
+      magic_cost: req.body.magic - cost,
+    });
+
+    if (!errors.isEmpty()) {
+      res.render("skill_create", {
+        title: "Create a Skill",
+        skill: skill,
+        errors: errors.array(),
+      });
+    } else {
+      await skill.save();
+      res.redirect(skill.url);
+    }
+  }),
+];
 
 // Display delete skill form
 exports.skill_delete_get = asyncHandler(async (req, res, next) => {
