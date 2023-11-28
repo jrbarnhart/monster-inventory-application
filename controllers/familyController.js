@@ -24,7 +24,9 @@ exports.family_detail = asyncHandler(async (req, res, next) => {
 
 // Display create family form on GET
 exports.family_create_get = asyncHandler(async (req, res, next) => {
-  res.send("NYI: Create family GET");
+  res.render("family_create", {
+    title: "Create a Family",
+  });
 });
 
 // Handle create family form on POST
