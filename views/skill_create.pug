@@ -1,0 +1,14 @@
+extends layout 
+
+block content
+  div.skill-create-content
+    form(method="POST" action="")
+      div.form-section 
+        label(for="name") Name:
+        input#name(type="text" name="name" placeholder="Skill Name" required="true" value=(undefined===skill ? "" : skill.name)) 
+        label(for="info") Info: 
+        textarea#info(name="info" placeholder="Skill info..." required="true" value=(undefined===skill ? "" : skill.info))
+        label(for="magic-cost") Magic(MP) Cost: 
+        input#magic-cost(name="magic-cost" type="number" min=0 max=99 required="true" value=(undefined===skill ? "" : skill.magic_cost) )
+      div.form-section
+        input#submit( type="submit" value="Submit Skill")
