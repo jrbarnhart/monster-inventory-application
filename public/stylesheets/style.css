@@ -23,7 +23,7 @@ h4 {
   row-gap: 40px;
   width: 100%;
   box-sizing: border-box;
-  max-height: 100%;
+  height: min-content;
 }
 
 .main-nav ul {
