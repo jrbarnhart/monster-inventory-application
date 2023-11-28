@@ -313,3 +313,29 @@
 .family-create-content #submit {
   height: 40px;
 }
+
+/* Skill Create */
+.skill-create-content form {
+  display: grid;
+  row-gap: 20px;
+}
+.skill-create-content .form-section {
+  display: grid;
+  row-gap: 8px;
+  font-size: 1.15rem;
+  font-weight: bold;
+}
+
+.skill-create-content input,
+.skill-create-content select,
+.skill-create-content textarea {
+  font-size: 1.1rem;
+}
+
+.skill-create-content #magic-cost {
+  width: min-content;
+}
+
+.skill-create-content #submit {
+  height: 40px;
+}
