@@ -20,19 +20,19 @@ block content
               option(value=family._id selected=(family._id.toString()===monsterinstance.family._id.toString() ? 'selected' : false)) #{family.name}
             else 
               option(value=family._id) #{family.name}
-      div.form-section
+      div.form-section.stats
         label(for="health") Health:
-        input#health(name="health" type="number" min=0 max=999 required="true" value=(undefined===monsterinstance ? "" : monsterinstance.health) )
+        input#health.stat(name="health" type="number" min=0 max=999 required="true" value=(undefined===monsterinstance ? "" : monsterinstance.health) )
         label(for="magic") Magic: 
-        input#magic(name="magic" type="number" min=0 max=999 required="true" value=(undefined===monsterinstance ? "" : monsterinstance.magic) )
+        input#magic.stat(name="magic" type="number" min=0 max=999 required="true" value=(undefined===monsterinstance ? "" : monsterinstance.magic) )
         label(for="attack") Attack: 
-        input#attack(name="attack" type="number" min=0 max=999 required="true" value=(undefined===monsterinstance ? "" : monsterinstance.attack) )
+        input#attack.stat(name="attack" type="number" min=0 max=999 required="true" value=(undefined===monsterinstance ? "" : monsterinstance.attack) )
         label(for="defense") Defense: 
-        input#defense(name="defense" type="number" min=0 max=999 required="true" value=(undefined===monsterinstance ? "" : monsterinstance.defense) )
+        input#defense.stat(name="defense" type="number" min=0 max=999 required="true" value=(undefined===monsterinstance ? "" : monsterinstance.defense) )
         label(for="agility") Agility: 
-        input#agility(name="agility" type="number" min=0 max=999 required="true" value=(undefined===monsterinstance ? "" : monsterinstance.agility) )
+        input#agility.stat(name="agility" type="number" min=0 max=999 required="true" value=(undefined===monsterinstance ? "" : monsterinstance.agility) )
         label(for="intelligence") Intelligence: 
-        input#intelligence(name="intelligence" type="number" min=0 max=999 required="true" value=(undefined===monsterinstance ? "" : monsterinstance.intelligence) )
+        input#intelligence.stat(name="intelligence" type="number" min=0 max=999 required="true" value=(undefined===monsterinstance ? "" : monsterinstance.intelligence) )
       div.form-section Skill Selection: 
         - var n = 0;
         ul.skills 
