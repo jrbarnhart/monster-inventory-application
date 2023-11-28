@@ -339,3 +339,43 @@
 .skill-create-content #submit {
   height: 40px;
 }
+
+/* Monsterinstance Create */
+.monsterinstance-create-content form {
+  display: grid;
+  row-gap: 20px;
+}
+.monsterinstance-create-content .form-section {
+  display: grid;
+  row-gap: 8px;
+  font-size: 1.15rem;
+  font-weight: bold;
+}
+
+.monsterinstance-create-content .stats {
+  display: grid;
+  grid-template: repeat(3, min-content min-content) / min-content 1fr;
+  column-gap: 5px;
+}
+
+.monsterinstance-create-content .stat {
+  width: min-content;
+}
+
+.monsterinstance-create-content .form-section .skills {
+  display: flex;
+  justify-content: space-around;
+  row-gap: 10px;
+  flex-wrap: wrap;
+  list-style: none;
+}
+
+.monsterinstance-create-content input,
+.monsterinstance-create-content select,
+.monsterinstance-create-content textarea {
+  font-size: 1.1rem;
+}
+
+.monsterinstance-create-content #submit {
+  height: 40px;
+}
