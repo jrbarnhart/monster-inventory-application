@@ -1,0 +1,12 @@
+extends layout 
+
+block content
+  div.family-create-content
+    form(method="POST" action="")
+      div.form-section 
+        label(for="name") Name:
+        input#name(type="text" name="name" placeholder="Family Name" required="true" value=(undefined===family ? "" : family.name)) 
+        label(for="info") Info: 
+        textarea#info(name="info" placeholder="Family info..." required="true" value=(undefined===family ? "" : family.info))
+      div.form-section
+        input#submit( type="submit" value="Submit Family")
