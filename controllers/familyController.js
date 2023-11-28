@@ -36,13 +36,12 @@ exports.family_create_post = [
     .trim()
     .isLength({ min: 2, max: 20 })
     .escape()
-    .withMessage("Name must be given.")
-    .isAlphanumeric("Name can only contain alphanumeric characters."),
+    .withMessage("Name must be between 2 and 20 characters."),
   body("info")
     .trim()
     .isLength({ max: 200 })
     .escape()
-    .withMessage("Info must be given."),
+    .withMessage("Info must be between 0 and 200 characters."),
 
   asyncHandler(async (req, res, next) => {
     const errors = validationResult(req);
