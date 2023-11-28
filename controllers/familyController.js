@@ -41,7 +41,7 @@ exports.family_create_post = [
     .trim()
     .isLength({ max: 200 })
     .escape()
-    .withMessage("Info must be between 0 and 200 characters."),
+    .withMessage("Info must be 200 characters for less."),
 
   asyncHandler(async (req, res, next) => {
     const errors = validationResult(req);
