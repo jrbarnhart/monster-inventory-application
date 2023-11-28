@@ -24,7 +24,9 @@ exports.skill_detail = asyncHandler(async (req, res, next) => {
 
 // Display create skill form
 exports.skill_create_get = asyncHandler(async (req, res, next) => {
-  res.send("NYI: GET create skill form");
+  res.render("skill_create", {
+    title: "Create a Skill",
+  });
 });
 
 // Handle create skill form
