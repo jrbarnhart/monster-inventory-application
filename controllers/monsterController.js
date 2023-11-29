@@ -109,13 +109,12 @@ exports.monster_create_post = [
         Skill.find({}).sort({ name: 1 }).exec(),
       ]);
 
-      console.log(monster);
-
       res.render("monster_create", {
         title: "Create a Monster",
         family_list: allFamilies,
         skill_list: allSkills,
         monster: monster,
+        errors: errorsArray,
       });
     } else {
       await monster.save();
