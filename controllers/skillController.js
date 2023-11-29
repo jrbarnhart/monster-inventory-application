@@ -42,6 +42,11 @@ exports.skill_create_post = [
     .isLength({ max: 200 })
     .escape()
     .withMessage("Info must be 200 characters or less."),
+  body("magic_cost")
+    .trim()
+    .isInt({ min: 0, max: 99 })
+    .escape()
+    .withMessage("Magic Cost must be an int between 0-99."),
 
   asyncHandler(async (req, res, next) => {
     const errors = validationResult(req);
