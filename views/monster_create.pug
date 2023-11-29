@@ -24,7 +24,7 @@ block content
               select(id=`skill_${n}` name=`skill_${n}`)
                 each skill in skill_list
                   if monster 
-                    option(value=skill._id selected=(monster.skills[n]._id === skill._id)) #{skill.name}
+                    option(value=skill._id selected=(monster.innate_skills[n].toString() === skill._id.toString() ? "selected" : false)) #{skill.name}
                   else
                     option(value=skill._id) #{skill.name}
                 else 
