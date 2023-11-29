@@ -14,7 +14,7 @@ block content
             else 
               option(value=family._id) #{family.name}
         label(for="info") Info: 
-        textarea#info(name="info" placeholder="Monster info..." required="true" value=(undefined===monster ? "" : monster.info))
+        textarea#info(name="info" placeholder="Monster info..." required="true") #{undefined===monster ? "" : monster.info}
       div.form-section Skill Selection: 
         - var n = 0;
         ul.skills 
