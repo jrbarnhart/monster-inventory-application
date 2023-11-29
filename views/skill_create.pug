@@ -7,8 +7,12 @@ block content
         label(for="name") Name:
         input#name(type="text" name="name" placeholder="Skill Name" required="true" value=(undefined===skill ? "" : skill.name)) 
         label(for="info") Info: 
-        textarea#info(name="info" placeholder="Skill info..." required="true" value=(undefined===skill ? "" : skill.info))
+        textarea#info(name="info" placeholder="Skill info..." required="true") #{undefined===skill ? "" : skill.info}
         label(for="magic-cost") Magic(MP) Cost: 
-        input#magic-cost(name="magic-cost" type="number" min=0 max=99 required="true" value=(undefined===skill ? "" : skill.magic_cost) )
+        input#magic-cost(name="magic_cost" type="number" min=0 max=99 required="true" value=(undefined===skill ? "" : skill.magic_cost) )
       div.form-section
         input#submit( type="submit" value="Submit Skill")
+        if errors
+          ul.errors
+            for error in errors
+              li!= error.msg
