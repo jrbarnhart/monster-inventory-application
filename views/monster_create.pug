@@ -22,7 +22,6 @@ block content
             li 
               label(for=`skill_${n}`) #{n + 1} - 
               select(id=`skill_${n}` name=`skill_${n}`)
-                option(value=null) None
                 each skill in skill_list
                   if monster 
                     option(value=skill._id selected=(monster.skills[n]._id === skill._id)) #{skill.name}
