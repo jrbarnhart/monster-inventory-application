@@ -101,6 +101,7 @@ exports.monster_create_post = [
       family: req.body.family,
       info: req.body.info,
       innate_skills: selectedSkills,
+      stock: 0,
     });
 
     if (!errors.isEmpty() || !skillsAreUnique) {
