@@ -56,3 +56,7 @@ block content
             - n++;
       div.form-section
         input#submit( type="submit" value="Submit Monster")
+        if errors
+          ul.errors
+            for error in errors
+              li!= error.msg
