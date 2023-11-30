@@ -117,8 +117,6 @@ exports.monsterinstance_create_post = [
       skills: selectedSkills,
     });
 
-    console.log(monsterinstance);
-
     if (!errors.isEmpty || !skillsAreUnique) {
       const [allMonsters, allSkills] = await Promise.all([
         Monster.find({}).sort({ name: 1 }).exec(),
