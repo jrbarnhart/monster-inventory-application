@@ -1,4 +1,5 @@
 const asyncHandler = require("express-async-handler");
+const { body, validationResult } = require("express-validator");
 
 const MonsterInstance = require("../models/monsterinstance");
 const Monster = require("../models/monster");
@@ -46,9 +47,19 @@ exports.monsterinstance_create_get = asyncHandler(async (req, res, next) => {
 });
 
 // Handle create monsterinstance form on POST
-exports.monsterinstance_create_post = asyncHandler(async (req, res, next) => {
-  res.send("NYI: Create monsterinstance POST");
-});
+exports.monsterinstance_create_post = [
+  /*   body("nickname")
+
+  body("monster")
+
+  body("health", "magic", "attack", "defense", "agility", "intelligence")
+
+  body("skill_0", "skill_1", "skill_2", "skill_3", "skill_4", "skill_5", "skill_6", "skill_7",) */
+
+  asyncHandler(async (req, res, next) => {
+    res.send("NYI: Create monsterinstance POST");
+  }),
+];
 
 // Display delete monsterinstance form on GET
 exports.monsterinstance_delete_get = asyncHandler(async (req, res, next) => {
