@@ -106,6 +106,7 @@ exports.monsterinstance_create_post = [
     const monsterinstance = new MonsterInstance({
       monster: req.body.monster,
       nickname: req.body.nickname,
+      level: req.body.level,
       health: req.body.health,
       magic: req.body.magic,
       attack: req.body.attack,
