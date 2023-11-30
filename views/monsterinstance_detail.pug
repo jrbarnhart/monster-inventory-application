@@ -5,6 +5,8 @@ block content
     h2 #{monsterinstance.nickname} - #[a.monster(href=monsterinstance.monster.url) #{monsterinstance.monster.name}]
 
     ul.stats Stats: 
+      li 
+        p.level #[span Level:] #{monsterinstance.level}
       li
         p.health #[span Health:] #{monsterinstance.health}
       li
