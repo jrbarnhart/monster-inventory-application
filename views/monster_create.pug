@@ -21,7 +21,7 @@ block content
           while n < 3
             li 
               label(for=`skill_${n}`) #{n + 1} - 
-              select(id=`skill_${n}` name=`skill_${n}`)
+              select(id=`skill_${n}` name=`skill_${n}` required="true")
                 each skill in skill_list
                   if monster 
                     option(value=skill._id selected=(monster.innate_skills[n].toString() === skill._id.toString() ? "selected" : false)) #{skill.name}
