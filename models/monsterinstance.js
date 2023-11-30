@@ -62,8 +62,8 @@ const MonsterInstanceSchema = new mongoose.Schema({
   gender: {
     type: String,
     required: true,
-    enum: ["Male", "Female", "None"],
-    default: "None",
+    enum: ["male", "female", "none"],
+    default: "none",
   },
   skills: {
     type: [mongoose.Schema.Types.ObjectId],
