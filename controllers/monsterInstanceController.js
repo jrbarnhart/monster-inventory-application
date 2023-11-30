@@ -48,16 +48,93 @@ exports.monsterinstance_create_get = asyncHandler(async (req, res, next) => {
 
 // Handle create monsterinstance form on POST
 exports.monsterinstance_create_post = [
-  /*   body("nickname")
-
-  body("monster")
-
+  body("nickname")
+    .trim()
+    .isLength({ min: 1, max: 5 })
+    .escape()
+    .withMessage("Nickname must be between 1 and 5 characters."),
+  body("monster").escape(),
+  body("gender").trim().toLowerCase().escape(),
+  body("level")
+    .trim()
+    .isInt({ min: 1, max: 99 })
+    .escape()
+    .withMessage("Level must be an int between 1-99"),
   body("health", "magic", "attack", "defense", "agility", "intelligence")
-
-  body("skill_0", "skill_1", "skill_2", "skill_3", "skill_4", "skill_5", "skill_6", "skill_7",) */
+    .trim()
+    .isInt({ min: 0, max: 999 })
+    .escape()
+    .withMessage("Stats must be an int between 0-999."),
+  body(
+    "skill_0",
+    "skill_1",
+    "skill_2",
+    "skill_3",
+    "skill_4",
+    "skill_5",
+    "skill_6",
+    "skill_7"
+  ).escape(),
 
   asyncHandler(async (req, res, next) => {
-    res.send("NYI: Create monsterinstance POST");
+    const errors = validationResult(req);
+    const errorsArray = errors.array();
+
+    const selectedSkills = [
+      req.body.skill_0,
+      req.body.skill_1,
+      req.body.skill_2,
+      req.body.skill_3,
+      req.body.skill_4,
+      req.body.skill_5,
+      req.body.skill_6,
+      req.body.skill_7,
+    ].filter((value) => value !== "");
+
+    console.log(selectedSkills);
+
+    const skillsAreUnique = selectedSkills.every((value) => {
+      return (
+        selectedSkills.indexOf(value) === selectedSkills.lastIndexOf(value)
+      );
+    });
+
+    if (!skillsAreUnique) {
+      errorsArray.push({ msg: "Skills must be unique." });
+    }
+
+    const monsterinstance = new MonsterInstance({
+      monster: req.body.monster,
+      nickname: req.body.nickname,
+      health: req.body.health,
+      magic: req.body.magic,
+      attack: req.body.attack,
+      defense: req.body.defense,
+      agility: req.body.agility,
+      intelligence: req.body.intelligence,
+      gender: req.body.gender,
+      skills: selectedSkills,
+    });
+
+    console.log(monsterinstance);
+
+    if (!errors.isEmpty || !skillsAreUnique) {
+      const [allMonsters, allSkills] = await Promise.all([
+        Monster.find({}).sort({ name: 1 }).exec(),
+        Skill.find({}).sort({ name: 1 }).exec(),
+      ]);
+
+      res.render("monsterinstance_create", {
+        title: "Create a Monster Instance",
+        monster_list: allMonsters,
+        skill_list: allSkills,
+        monsterinstance: monsterinstance,
+        errors: errorsArray,
+      });
+    } else {
+      await monsterinstance.save();
+      res.redirect(monsterinstance.url);
+    }
   }),
 ];
 
