@@ -24,6 +24,8 @@ block content
             option(value="female") Female
             option(value="none") None
       div.form-section.stats
+        label(for="level") Level:
+        input#level.stat(name="level" type="number" min=0 max=99 required="true" value=(undefined===monsterinstance ? "" : monsterinstance.health) )
         label(for="health") Health:
         input#health.stat(name="health" type="number" min=0 max=999 required="true" value=(undefined===monsterinstance ? "" : monsterinstance.health) )
         label(for="magic") Magic: 
@@ -41,12 +43,12 @@ block content
         ul.skills 
           while n < 8
             li 
-              label(for=`skill-${n}`) #{n + 1} - 
-              select(id=`skill-${n}` name=`skill-${n}`)
-                option(value=null) None
+              label(for=`skill_${n}`) #{n + 1} - 
+              select(id=`skill_${n}` name=`skill_${n}`)
+                option(value="") None
                 each skill in skill_list
                   if monsterinstance
-                    option(value=skill._id selected=(monsterinstance.skills[n]._id === skill._id)) #{skill.name}
+                    option(value=skill._id selected=(monsterinstance.skills[n] && monsterinstance.skills[n].toString() === skill._id.toString() ? "selected" : false)) #{skill.name}
                   else
                     option(value=skill._id) #{skill.name}
                 else 
