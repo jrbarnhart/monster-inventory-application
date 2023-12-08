@@ -1,0 +1,9 @@
+extends layout 
+
+block content 
+  div.delete-record-content
+    h2=record_name
+    form(method="POST" action="")
+      label(for="password") Admin Password: 
+      input#password(type="secret" name="password")
+      input#submit(type="submit" value="Delete Record")
