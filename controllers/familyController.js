@@ -92,6 +92,41 @@ exports.family_update_get = asyncHandler(async (req, res, next) => {
 });
 
 // Handle update family form on POST
-exports.family_update_post = asyncHandler(async (req, res, next) => {
-  res.send("NYI: Update family POST");
-});
+exports.family_update_post = [
+  body("name")
+    .trim()
+    .isLength({ min: 2, max: 20 })
+    .escape()
+    .withMessage("Name must be between 2 and 20 characters."),
+  body("info")
+    .trim()
+    .isLength({ max: 200 })
+    .escape()
+    .withMessage("Info must be 200 characters for less."),
+
+  asyncHandler(async (req, res, next) => {
+    const errors = validationResult(req);
+
+    const family = new Family({
+      name: req.body.name,
+      info: req.body.info,
+      _id: req.params.id,
+    });
+
+    if (!errors.isEmpty()) {
+      res.render("family_create", {
+        title: "Update Family",
+        family: family,
+        errors: errors.array(),
+      });
+      return;
+    } else {
+      const updatedFamily = await Family.findByIdAndUpdate(
+        req.params.id,
+        family,
+        {}
+      );
+      res.redirect(updatedFamily.url);
+    }
+  }),
+];
