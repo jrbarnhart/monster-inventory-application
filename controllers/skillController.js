@@ -72,7 +72,18 @@ exports.skill_create_post = [
 
 // Display delete skill form
 exports.skill_delete_get = asyncHandler(async (req, res, next) => {
-  res.send("NYI: GET delete skill form");
+  const skill = await Skill.findById(req.params.id).exec();
+
+  if (skill === null) {
+    const err = new Error("Skill not found");
+    err.status = 404;
+    return next(err);
+  }
+
+  res.render("delete_record", {
+    title: "Delete Skill",
+    record: skill,
+  });
 });
 
 // Handle delete skill form
