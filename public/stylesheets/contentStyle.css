@@ -86,6 +86,10 @@
   font-weight: bold;
 }
 
+.monster-detail-content .update {
+  margin-right: 10px;
+}
+
 /* Family List */
 .family-list-content ul {
   list-style: none;
@@ -268,6 +272,10 @@
 .monsterinstance-detail-content .skills li {
   font-weight: normal;
   font-size: 1rem;
+}
+
+.monsterinstance-detail-content .update {
+  margin-right: 10px;
 }
 
 /* Monster Create */
