@@ -2,7 +2,7 @@ extends layout
 
 block content 
   div.delete-record-content
-    h2=family.name
+    h2 #{record.name ? record.name : record.nickname ? record.nickname : "Record"}
     form(method="POST" action="")
       label(for="password") Admin Password: 
       input#password(type="secret" name="password")
