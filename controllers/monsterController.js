@@ -141,9 +141,52 @@ exports.monster_delete_get = asyncHandler(async (req, res, next) => {
 });
 
 // Handle delete monster form on POST
-exports.monster_delete_post = asyncHandler(async (req, res, next) => {
-  res.send("NYI: Delete monster POST");
-});
+exports.monster_delete_post = [
+  body("password")
+    .matches(process.env.DELETE_PASSWORD)
+    .withMessage("Password is incorrect."),
+
+  asyncHandler(async (req, res, next) => {
+    const errors = validationResult(req);
+    const errorsArray = errors.array();
+
+    const monster = await Monster.findById(req.params.id);
+    const instancesUsingMonster = await MonsterInstance.find({
+      monster: monster._id,
+    }).exec();
+
+    if (instancesUsingMonster.length > 0) {
+      errorsArray.push({
+        msg: "Monster in use by monster instances. Delete these instances first.",
+      });
+
+      instancesUsingMonster.forEach((instance) => {
+        errorsArray.push({
+          msg: `- ${instance.nickname}`,
+        });
+      });
+    }
+
+    if (monster === null) {
+      const err = new Error("Monster not found");
+      err.status = 404;
+      return next(err);
+    }
+
+    if (errorsArray.length > 0) {
+      res.render("delete_record", {
+        title: "Delete Monster",
+        record: monster,
+        errors: errorsArray,
+      });
+    } else {
+      await Monster.findByIdAndDelete(req.params.id);
+      res.render("delete_successful", {
+        title: `${monster.name} Deleted`,
+      });
+    }
+  }),
+];
 
 // Display update monster form on GET
 exports.monster_update_get = asyncHandler(async (req, res, next) => {
