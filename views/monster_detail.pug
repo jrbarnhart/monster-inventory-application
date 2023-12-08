@@ -12,3 +12,6 @@ block content
       else 
         li This monster has no skills.
     p.stock Total in stock: #{monster.stock}
+
+    a.update(href=`${monster.url}/update`) Update
+    a.delete(href=`${monster.url}/delete`) Delete

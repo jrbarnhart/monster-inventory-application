@@ -28,3 +28,6 @@ block content
           p.skill #[a.skill-name(href=skill.url) #{skill.name}]: (#{skill.magic_cost < 99 ? skill.magic_cost : "All" } MP) #{skill.info}.
       else 
         li This monster has no skills.
+
+    a.update(href=`${monsterinstance.url}/update`) Update
+    a.delete(href=`${monsterinstance.url}/delete`) Delete
