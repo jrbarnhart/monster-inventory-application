@@ -67,7 +67,18 @@ exports.family_create_post = [
 
 // Display delete family form on GET
 exports.family_delete_get = asyncHandler(async (req, res, next) => {
-  res.send("NYI: Delete family GET");
+  const family = await Family.findById(req.params.id).exec();
+
+  if (family === null) {
+    const err = new Error("Family not found");
+    err.status = 404;
+    return next(err);
+  }
+
+  res.render("delete_record", {
+    title: "Delete Family",
+    family: family,
+  });
 });
 
 // Handle delete family form on POST
