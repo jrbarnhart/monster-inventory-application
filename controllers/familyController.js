@@ -2,6 +2,7 @@ const asyncHandler = require("express-async-handler");
 const { body, validationResult } = require("express-validator");
 
 const Family = require("../models/family");
+const Monster = require("../models/monster");
 
 // List all families
 exports.family_list = asyncHandler(async (req, res, next) => {
@@ -89,7 +90,24 @@ exports.family_delete_post = [
 
   asyncHandler(async (req, res, next) => {
     const errors = validationResult(req);
+    const errorsArray = errors.array();
+
     const family = await Family.findById(req.params.id).exec();
+    const monstersUsingFamily = await Monster.find({
+      family: family._id,
+    }).exec();
+
+    if (monstersUsingFamily.length > 0) {
+      errorsArray.push({
+        msg: "Family in use by monsters. Delete these monsters first.",
+      });
+
+      monstersUsingFamily.forEach((monster) => {
+        errorsArray.push({
+          msg: `- ${monster.name}`,
+        });
+      });
+    }
 
     if (family === null) {
       const err = new Error("Family not found");
@@ -97,11 +115,11 @@ exports.family_delete_post = [
       return next(err);
     }
 
-    if (!errors.isEmpty()) {
+    if (!errors.isEmpty() || monstersUsingFamily.length > 0) {
       res.render("delete_record", {
         title: "Delete Family",
         record: family,
-        errors: errors.array(),
+        errors: errorsArray,
       });
     } else {
       await Family.findByIdAndDelete(req.params.id, {});
