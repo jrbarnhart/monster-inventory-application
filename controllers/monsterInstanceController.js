@@ -154,9 +154,38 @@ exports.monsterinstance_delete_get = asyncHandler(async (req, res, next) => {
 });
 
 // Handle delete monsterinstance form on POST
-exports.monsterinstance_delete_post = asyncHandler(async (req, res, next) => {
-  res.send("NYI: Delete monsterinstance POST");
-});
+exports.monsterinstance_delete_post = [
+  body("password")
+    .matches(process.env.DELETE_PASSWORD)
+    .withMessage("Password is incorrect."),
+
+  asyncHandler(async (req, res, next) => {
+    const errors = validationResult(req);
+
+    const monsterInstance = await MonsterInstance.findById(
+      req.params.id
+    ).exec();
+
+    if (monsterInstance === null) {
+      const err = new Error("Monster Instance not found");
+      err.status = 404;
+      return next(err);
+    }
+
+    if (!errors.isEmpty()) {
+      res.render("delete_record", {
+        title: "Delete Monster Instance",
+        record: monsterInstance,
+        errors: errors.array(),
+      });
+    } else {
+      await MonsterInstance.findByIdAndDelete(req.params.id);
+      res.render("delete_successful", {
+        title: `${monsterInstance.nickname} Deleted`,
+      });
+    }
+  }),
+];
 
 // Display update monsterinstance form on GET
 exports.monsterinstance_update_get = asyncHandler(async (req, res, next) => {
