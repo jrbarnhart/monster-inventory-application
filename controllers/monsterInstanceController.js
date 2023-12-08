@@ -1,5 +1,6 @@
 const asyncHandler = require("express-async-handler");
 const { body, validationResult } = require("express-validator");
+const mongoose = require("mongoose");
 
 const MonsterInstance = require("../models/monsterinstance");
 const Monster = require("../models/monster");
@@ -131,8 +132,35 @@ exports.monsterinstance_create_post = [
         errors: errorsArray,
       });
     } else {
-      await monsterinstance.save();
-      res.redirect(monsterinstance.url);
+      const monster = await Monster.findById(req.body.monster).exec();
+      const instancesUsingMonster = await MonsterInstance.find({
+        monster: monster._id,
+      }).exec();
+
+      const session = await mongoose.startSession();
+      session.startTransaction();
+      try {
+        const updatedMonster = new Monster({
+          ...monster,
+          stock: instancesUsingMonster.length + 1,
+          _id: req.body.monster,
+        });
+
+        await Monster.findByIdAndUpdate(req.body.monster, updatedMonster, {
+          session,
+        });
+        await monsterinstance.save({ session });
+        await session.commitTransaction();
+        session.endSession();
+
+        res.redirect(monsterinstance.url);
+      } catch (error) {
+        await session.abortTransaction();
+        session.endSession();
+
+        console.error(error);
+        res.status(500).send("Internal server error. Transaction aborted.");
+      }
     }
   }),
 ];
@@ -179,10 +207,41 @@ exports.monsterinstance_delete_post = [
         errors: errors.array(),
       });
     } else {
-      await MonsterInstance.findByIdAndDelete(req.params.id);
-      res.render("delete_successful", {
-        title: `${monsterInstance.nickname} Deleted`,
-      });
+      const monster = await Monster.findById(monsterInstance.monster).exec();
+      const instancesUsingMonster = await MonsterInstance.find({
+        monster: monster._id,
+      }).exec();
+
+      const session = await mongoose.startSession();
+      session.startTransaction();
+      try {
+        const updatedMonster = new Monster({
+          ...monster,
+          stock: instancesUsingMonster.length - 1,
+          _id: monsterInstance.monster,
+        });
+
+        await Monster.findByIdAndUpdate(
+          monsterInstance.monster,
+          updatedMonster,
+          {
+            session,
+          }
+        );
+        await MonsterInstance.findByIdAndDelete(req.params.id);
+        await session.commitTransaction();
+        session.endSession();
+
+        res.render("delete_successful", {
+          title: `${monsterInstance.nickname} Deleted`,
+        });
+      } catch (error) {
+        await session.abortTransaction();
+        session.endSession();
+
+        console.error(error);
+        res.status(500).send("Internal server error. Transaction aborted.");
+      }
     }
   }),
 ];
