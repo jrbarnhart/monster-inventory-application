@@ -25,7 +25,7 @@ block content
             option(value="none") None
       div.form-section.stats
         label(for="level") Level:
-        input#level.stat(name="level" type="number" min=1 max=99 required="true" value=(undefined===monsterinstance ? "" : monsterinstance.health) )
+        input#level.stat(name="level" type="number" min=1 max=99 required="true" value=(undefined===monsterinstance ? "" : monsterinstance.level) )
         label(for="health") Health:
         input#health.stat(name="health" type="number" min=0 max=999 required="true" value=(undefined===monsterinstance ? "" : monsterinstance.health) )
         label(for="magic") Magic: 
