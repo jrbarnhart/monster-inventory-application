@@ -149,7 +149,24 @@ exports.monsterinstance_delete_post = asyncHandler(async (req, res, next) => {
 
 // Display update monsterinstance form on GET
 exports.monsterinstance_update_get = asyncHandler(async (req, res, next) => {
-  res.send("NYI: update monsterinstance GET");
+  const [monsterInstance, allMonsters, allSkills] = await Promise.all([
+    MonsterInstance.findById(req.params.id).exec(),
+    Monster.find({}).sort({ name: 1 }).exec(),
+    Skill.find({}).sort({ name: 1 }).exec(),
+  ]);
+
+  if (monsterInstance === null) {
+    const err = new Error("Monster Instance not found");
+    err.status = 404;
+    return next(err);
+  }
+
+  res.render("monsterinstance_create", {
+    title: "Create a Monster Instance",
+    monsterinstance: monsterInstance,
+    monster_list: allMonsters,
+    skill_list: allSkills,
+  });
 });
 
 // Handle update monsterinstance form on POST
