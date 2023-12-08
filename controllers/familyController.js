@@ -77,14 +77,38 @@ exports.family_delete_get = asyncHandler(async (req, res, next) => {
 
   res.render("delete_record", {
     title: "Delete Family",
-    family: family,
+    record: family,
   });
 });
 
 // Handle delete family form on POST
-exports.family_delete_post = asyncHandler(async (req, res, next) => {
-  res.send("NYI: Delete family POST");
-});
+exports.family_delete_post = [
+  body("password").matches(process.env.DELETE_PASSWORD),
+
+  asyncHandler(async (req, res, next) => {
+    const errors = validationResult(req);
+    const family = await Family.findById(req.params.id).exec();
+
+    if (family === null) {
+      const err = new Error("Family not found");
+      err.status = 404;
+      return next(err);
+    }
+
+    if (!errors.isEmpty()) {
+      res.render("delete_record", {
+        title: "Delete Family",
+        record: family,
+        errors: errors.array(),
+      });
+    } else {
+      await Family.findByIdAndDelete(req.params.id, {});
+      res.redirect("delete_successful", {
+        title: "Record Deleted",
+      });
+    }
+  }),
+];
 
 // Display update family form on GET
 exports.family_update_get = asyncHandler(async (req, res, next) => {
