@@ -139,7 +139,18 @@ exports.monsterinstance_create_post = [
 
 // Display delete monsterinstance form on GET
 exports.monsterinstance_delete_get = asyncHandler(async (req, res, next) => {
-  res.send("NYI: Delete monsterinstance GET");
+  const monsterInstance = await MonsterInstance.findById(req.params.id).exec();
+
+  if (monsterInstance === null) {
+    const err = new Error("Monster Instance not found");
+    err.status = 404;
+    return next(err);
+  }
+
+  res.render("delete_record", {
+    title: "Delete Monster Instance",
+    record: monsterInstance,
+  });
 });
 
 // Handle delete monsterinstance form on POST
