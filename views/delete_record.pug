@@ -5,7 +5,7 @@ block content
     h2 #{record.name ? record.name : record.nickname ? record.nickname : "Record"}
     form(method="POST" action="")
       label(for="password") Admin Password: 
-      input#password(type="secret" name="password")
+      input#password(type="password" name="password")
       input#submit(type="submit" value="Delete Record")
     if errors
       ul.errors
