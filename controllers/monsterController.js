@@ -126,7 +126,18 @@ exports.monster_create_post = [
 
 // Display delete monster form on GET
 exports.monster_delete_get = asyncHandler(async (req, res, next) => {
-  res.send("NYI: Delete monster GET");
+  const monster = await Monster.findById(req.params.id).exec();
+
+  if (monster === null) {
+    const err = new Error("Monster not found");
+    err.status = 404;
+    return next(err);
+  }
+
+  res.render("delete_record", {
+    title: "Delete Monster",
+    record: monster,
+  });
 });
 
 // Handle delete monster form on POST
