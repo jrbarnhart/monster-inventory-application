@@ -2,6 +2,8 @@ const asyncHandler = require("express-async-handler");
 const { body, validationResult } = require("express-validator");
 
 const Skill = require("../models/skill");
+const Monster = require("../models/monster");
+const MonsterInstance = require("../models/monsterinstance");
 
 // List all skills
 exports.skill_list = asyncHandler(async (req, res, next) => {
@@ -87,9 +89,65 @@ exports.skill_delete_get = asyncHandler(async (req, res, next) => {
 });
 
 // Handle delete skill form
-exports.skill_delete_post = asyncHandler(async (req, res, next) => {
-  res.send("NYI: Post delete skill form");
-});
+exports.skill_delete_post = [
+  body("password")
+    .matches(process.env.DELETE_PASSWORD)
+    .withMessage("Password is incorrect."),
+
+  asyncHandler(async (req, res, next) => {
+    const errors = validationResult(req);
+    const errorsArray = errors.array();
+
+    const skill = await Skill.findById(req.params.id).exec();
+    const [monstersUsingSkill, monsterInstancesUsingSkill] = await Promise.all([
+      Monster.find({ innate_skills: skill._id }).exec(),
+      MonsterInstance.find({ skills: skill._id }).exec(),
+    ]);
+
+    if (monstersUsingSkill.length > 0) {
+      errorsArray.push({
+        msg: "Family in use by monsters. Delete these monsters first.",
+      });
+
+      monstersUsingSkill.forEach((monster) => {
+        errorsArray.push({
+          msg: `- ${monster.name}`,
+        });
+      });
+    }
+
+    if (monsterInstancesUsingSkill.length > 0) {
+      errorsArray.push({
+        msg: "Family in use by monster instances. Delete these instances first.",
+      });
+
+      monsterInstancesUsingSkill.forEach((instance) => {
+        errorsArray.push({
+          msg: `- ${instance.nickname}`,
+        });
+      });
+    }
+
+    if (skill === null) {
+      const err = new Error("Skill not found");
+      err.status = 404;
+      return next(err);
+    }
+
+    if (errorsArray.length > 0) {
+      res.render("delete_record", {
+        title: "Delete Skill",
+        record: skill,
+        errors: errorsArray,
+      });
+    } else {
+      await Skill.findByIdAndDelete(req.params.id, {});
+      res.render("delete_successful", {
+        title: `${skill.name} Deleted`,
+      });
+    }
+  }),
+];
 
 // Display update skill form
 exports.skill_update_get = asyncHandler(async (req, res, next) => {
