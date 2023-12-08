@@ -187,6 +187,10 @@
   font-weight: bold;
 }
 
+.skill-detail-content .update {
+  margin-right: 10px;
+}
+
 /* Monster Instance List */
 .monsterinstance-list-content ul {
   list-style: none;
