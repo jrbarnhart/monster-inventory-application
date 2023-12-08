@@ -157,6 +157,67 @@ exports.monster_update_get = asyncHandler(async (req, res, next) => {
 });
 
 // Handle update monster form on POST
-exports.monster_update_post = asyncHandler(async (req, res, next) => {
-  res.send("NYI: update monster POST");
-});
+exports.monster_update_post = [
+  body("name")
+    .trim()
+    .isLength({ min: 2, max: 20 })
+    .escape()
+    .withMessage("Name must be between 2 and 20 characters."),
+  body("family").escape(),
+  body("info")
+    .trim()
+    .isLength({ max: 200 })
+    .escape()
+    .withMessage("Info must be 200 characters for less."),
+  body("skill-1", "skill-2", "skill-3").escape(),
+
+  asyncHandler(async (req, res, next) => {
+    const errors = validationResult(req);
+    const errorsArray = errors.array();
+
+    const selectedSkills = [
+      req.body.skill_0,
+      req.body.skill_1,
+      req.body.skill_2,
+    ];
+    const skillsAreUnique = selectedSkills.every((value) => {
+      return (
+        selectedSkills.indexOf(value) === selectedSkills.lastIndexOf(value)
+      );
+    });
+
+    if (!skillsAreUnique) {
+      errorsArray.push({ msg: "Skills must be unique." });
+    }
+
+    const monster = new Monster({
+      name: req.body.name,
+      family: req.body.family,
+      info: req.body.info,
+      innate_skills: selectedSkills,
+      _id: req.params.id,
+    });
+
+    if (!errors.isEmpty() || !skillsAreUnique) {
+      const [allFamilies, allSkills] = await Promise.all([
+        Family.find({}).sort({ name: 1 }).exec(),
+        Skill.find({}).sort({ name: 1 }).exec(),
+      ]);
+
+      res.render("monster_create", {
+        title: "Update Monster",
+        family_list: allFamilies,
+        skill_list: allSkills,
+        monster: monster,
+        errors: errorsArray,
+      });
+    } else {
+      const updatedMonster = await Monster.findByIdAndUpdate(
+        req.params.id,
+        monster,
+        {}
+      );
+      res.redirect(updatedMonster.url);
+    }
+  }),
+];
