@@ -83,7 +83,9 @@ exports.family_delete_get = asyncHandler(async (req, res, next) => {
 
 // Handle delete family form on POST
 exports.family_delete_post = [
-  body("password").matches(process.env.DELETE_PASSWORD),
+  body("password")
+    .matches(process.env.DELETE_PASSWORD)
+    .withMessage("Password is incorrect."),
 
   asyncHandler(async (req, res, next) => {
     const errors = validationResult(req);
@@ -103,8 +105,8 @@ exports.family_delete_post = [
       });
     } else {
       await Family.findByIdAndDelete(req.params.id, {});
-      res.redirect("delete_successful", {
-        title: "Record Deleted",
+      res.render("delete_successful", {
+        title: `${family.name} Deleted`,
       });
     }
   }),
