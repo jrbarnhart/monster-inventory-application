@@ -82,10 +82,61 @@ exports.skill_delete_post = asyncHandler(async (req, res, next) => {
 
 // Display update skill form
 exports.skill_update_get = asyncHandler(async (req, res, next) => {
-  res.send("NYI: GET update skill form");
+  const skill = await Skill.findById(req.params.id).exec();
+
+  if (skill === null) {
+    const err = new Error("Skill not found");
+    err.status = 404;
+    return next(err);
+  }
+
+  res.render("skill_create", {
+    title: "Update Skill",
+    skill: skill,
+  });
 });
 
 // Handle update skill form
-exports.skill_update_post = asyncHandler(async (req, res, next) => {
-  res.send("NYI: POST update skill form");
-});
+exports.skill_update_post = [
+  body("name")
+    .trim()
+    .isLength({ min: 2, max: 20 })
+    .escape()
+    .withMessage("Name must be between 2 and 20 characters."),
+  body("info")
+    .trim()
+    .isLength({ max: 200 })
+    .escape()
+    .withMessage("Info must be 200 characters or less."),
+  body("magic_cost")
+    .trim()
+    .isInt({ min: 0, max: 99 })
+    .escape()
+    .withMessage("Magic Cost must be an int between 0-99."),
+
+  asyncHandler(async (req, res, next) => {
+    const errors = validationResult(req);
+
+    const skill = new Skill({
+      name: req.body.name,
+      info: req.body.info,
+      magic_cost: req.body.magic_cost,
+      _id: req.params.id,
+    });
+
+    if (!errors.isEmpty()) {
+      res.render("skill_create", {
+        title: "Update Skill",
+        skill: skill,
+        errors: errors.array(),
+      });
+    } else {
+      const updatedSkill = await Skill.findByIdAndUpdate(
+        req.params.id,
+        skill,
+        {}
+      );
+      res.redirect(updatedSkill.url);
+    }
+  }),
+];
