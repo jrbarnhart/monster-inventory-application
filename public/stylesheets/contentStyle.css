@@ -133,6 +133,10 @@
   font-weight: bold;
 }
 
+.family-detail-content .update {
+  margin-right: 10px;
+}
+
 /* Skill List */
 .skill-list-content ul {
   list-style: none;
