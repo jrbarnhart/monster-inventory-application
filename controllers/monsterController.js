@@ -136,7 +136,24 @@ exports.monster_delete_post = asyncHandler(async (req, res, next) => {
 
 // Display update monster form on GET
 exports.monster_update_get = asyncHandler(async (req, res, next) => {
-  res.send("NYI: update monster GET");
+  const [monster, allFamilies, allSkills] = await Promise.all([
+    Monster.findById(req.params.id).populate("family").exec(),
+    Family.find({}).sort({ name: 1 }).exec(),
+    Skill.find({}).sort({ name: 1 }).exec(),
+  ]);
+
+  if (monster === null) {
+    const err = new Error("Monster not found");
+    err.status = 404;
+    return next(err);
+  }
+
+  res.render("monster_create", {
+    title: "Update Monster",
+    monster: monster,
+    family_list: allFamilies,
+    skill_list: allSkills,
+  });
 });
 
 // Handle update monster form on POST
