@@ -50,7 +50,7 @@ exports.monsterinstance_create_get = asyncHandler(async (req, res, next) => {
 exports.monsterinstance_create_post = [
   body("nickname")
     .trim()
-    .isLength({ min: 1, max: 20 })
+    .isLength({ min: 1, max: 5 })
     .escape()
     .withMessage("Nickname must be between 1 and 5 characters."),
   body("monster").escape(),
@@ -117,7 +117,7 @@ exports.monsterinstance_create_post = [
       skills: selectedSkills,
     });
 
-    if (!errors.isEmpty || !skillsAreUnique) {
+    if (!errors.isEmpty() || !skillsAreUnique) {
       const [allMonsters, allSkills] = await Promise.all([
         Monster.find({}).sort({ name: 1 }).exec(),
         Skill.find({}).sort({ name: 1 }).exec(),
@@ -173,7 +173,7 @@ exports.monsterinstance_update_get = asyncHandler(async (req, res, next) => {
 exports.monsterinstance_update_post = [
   body("nickname")
     .trim()
-    .isLength({ min: 1, max: 20 })
+    .isLength({ min: 1, max: 5 })
     .escape()
     .withMessage("Nickname must be between 1 and 5 characters."),
   body("monster").escape(),
@@ -241,7 +241,7 @@ exports.monsterinstance_update_post = [
       _id: req.params.id,
     });
 
-    if (!errors.isEmpty || !skillsAreUnique) {
+    if (!errors.isEmpty() || !skillsAreUnique) {
       const [allMonsters, allSkills] = await Promise.all([
         Monster.find({}).sort({ name: 1 }).exec(),
         Skill.find({}).sort({ name: 1 }).exec(),
