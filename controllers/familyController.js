@@ -77,7 +77,18 @@ exports.family_delete_post = asyncHandler(async (req, res, next) => {
 
 // Display update family form on GET
 exports.family_update_get = asyncHandler(async (req, res, next) => {
-  res.send("NYI: Update family GET");
+  const family = await Family.findById(req.params.id).exec();
+
+  if (family === null) {
+    const err = new Error("Family not found");
+    err.status = 404;
+    return next(err);
+  }
+
+  res.render("family_create", {
+    title: "Update Family",
+    family: family,
+  });
 });
 
 // Handle update family form on POST
