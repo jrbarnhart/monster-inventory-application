@@ -7,3 +7,7 @@ block content
       label(for="password") Admin Password: 
       input#password(type="secret" name="password")
       input#submit(type="submit" value="Delete Record")
+    if errors
+      ul.errors
+        for error in errors
+          li!= error.msg
